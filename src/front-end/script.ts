@@ -33,7 +33,7 @@ const amazonScrapping = () => {
       }
       
       items.forEach((product: Record<string, any>)=> {
-        const titleCut = product.title.slice(0, 50) + '...';
+        const titleCut = product.title.slice(0, 74) + '...';
         const card = document.createElement('article');
         card.classList.add('result-item')
         card.innerHTML = `
