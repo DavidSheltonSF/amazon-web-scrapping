@@ -68,9 +68,11 @@ window.addEventListener('keydown', (event)=> {
 
 const button = document.querySelector('.search-button')
   ?.addEventListener('click', (event) => {
+
     event.preventDefault();
     amazonScrapping();
- 
+
+    
 });
 
 

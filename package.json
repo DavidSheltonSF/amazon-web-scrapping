@@ -4,7 +4,7 @@
   "description": "",
   "main": "./dist/front-end/script.js",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite dev",
     "start": "nodemon",
     "build": "vite build",
     "test": "echo \"Error: no test specified\" && exit 1"

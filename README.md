@@ -9,6 +9,11 @@ libaries and tools:
 - nodemon
 - express
 
+Há um único arquivo html (index.html), que importa o único arquivo javascript para o front-end (script.js). Nesse arquivo js, são definidos dois event listeners, que executarão o scrapping quando o usuário clicar no botão de pesquisa ou quando pressionar o botão enter.
+
+### API
+
+T
 
 ## How to test
 
@@ -28,4 +33,8 @@ npm i
 npm run start
 ```
 
-3 - 
+4 - Run Vite
+
+```bash
+npm run dev
+```
