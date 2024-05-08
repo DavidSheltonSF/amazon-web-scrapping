@@ -54,7 +54,7 @@ npm i
 npm run start
 ```
 
-4 - Run Vite
+4 - Run Vite in a new terminal
 
 ```bash
 npm run dev

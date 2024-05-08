@@ -44,8 +44,8 @@ const amazonScrapping = () => {
             <h4>${titleCut}</h4>
           </div>
           <div class="product-rating">
-            <p>${product.rating['stars']}</p>
-            <p>${product.rating['reviews']}</p>
+            <p>${product.rating['stars'] ? product.rating['stars'] : '' }</p>
+            <p>${product.rating['reviews'] ? product.rating['reviews'] : ''}</p>
           </div>
         `
         resultsWrapper?.appendChild(card);
