@@ -1,8 +1,9 @@
 import axios from 'axios';
 
-const amazonScrapping = () => {
-  const searchBarElement = <HTMLInputElement> document.querySelector('.search-bar');
+const searchBarElement = <HTMLInputElement> document.querySelector('.search-bar');
 
+const amazonScrapping = () => {
+  
     const key = searchBarElement?.value;
 
     const resultsWrapper = document.querySelector('.results-wrapper')
@@ -60,19 +61,23 @@ const amazonScrapping = () => {
   });
 }
 
-window.addEventListener('keydown', (event)=> {
-  if(event.key === 'Enter'){
-    amazonScrapping();
-  }
-})
-
 const button = document.querySelector('.search-button')
-  ?.addEventListener('click', (event) => {
-
+  ?.addEventListener('click', (event: Event) => {
     event.preventDefault();
     amazonScrapping();
+});
 
-    
+const keyDownListener = (event: any) => {
+  if (event.key === 'Enter') {
+      amazonScrapping();
+  }
+}
+
+searchBarElement.addEventListener('focus', () => {
+  window.addEventListener('keydown', keyDownListener);
+});
+searchBarElement.addEventListener('blur', () => {
+  window.removeEventListener('keydown', keyDownListener);
 });
 
 
