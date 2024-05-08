@@ -9,7 +9,25 @@ libaries and tools:
 - nodemon
 - express
 
-Há um único arquivo html (index.html), que importa o único arquivo javascript para o front-end (script.js). Nesse arquivo js, são definidos dois event listeners, que executarão o scrapping quando o usuário clicar no botão de pesquisa ou quando pressionar o botão enter.
+## Front End
+
+Há um único arquivo html (index.html), que importa o único arquivo javascript para o front-end (script.js). Nesse arquivo js, são definidos dois event listeners, que farão uma requisição para a api usanso o AXIOS  quando o usuário clicar no botão de pesquisa ou quando pressionar o botão enter (apenas quando a barra de pesquisa estiver ativa). Quando requisição é executada, é exibida uma mensagem ao usuário informando o carregamento e se não houver erro os dados dos produtos são carregados na página, mas se houver erro, é exibida uma mensagem ao usuário pedindo para que ele tente novamente mais tarde.
+
+## Back End
+
+Uma API que o scrapping na webpage amazon.com.br, listando os produtos da primeira página de uma pesquisa feita para uma keyword específica.
+
+### Endpoints
+
+GET: /api/scrape?key=${key}
+
+### Middlewares
+
+Há um único middeware, e este realiza o caching da requisição GET
+
+### Controllers
+
+Um controller para para manipular rota /api/scrape. Ele também acessa a função no arquivo scrapHandling/index.js
 
 ### API
 

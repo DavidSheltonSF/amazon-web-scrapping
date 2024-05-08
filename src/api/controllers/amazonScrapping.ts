@@ -1,6 +1,6 @@
 import {Request, Response} from 'express';
 
-import amazonScrapping from '../amazonScrapping';
+import scrapeHandling from '../scrapeHandling';
 
 
 export const amazonScrappingController = async (req: Request, res: Response) => {
@@ -9,7 +9,7 @@ export const amazonScrappingController = async (req: Request, res: Response) => 
 
     console.log(key)
 
-    const response = await amazonScrapping(String(key));
+    const response = await scrapeHandling(String(key));
 
     res.status(200).json(response);
     
