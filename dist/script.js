@@ -1,6 +1,6 @@
 var _a;
 const searchBarElement = document.querySelector('.search-bar');
-const amazonScrapping = () => {
+const amazonScrapping = async () => {
     const key = searchBarElement === null || searchBarElement === void 0 ? void 0 : searchBarElement.value;
     const resultsWrapper = document.querySelector('.results-wrapper');
     const userHelper = document.querySelector('.user-helper');
@@ -9,7 +9,7 @@ const amazonScrapping = () => {
         <h1>Loading...</h1>
       `;
     }
-    axios.get(`https://amazon-web-scrapping.onrender.com/api/scrape?key=${key}`, {
+    axios.get(`https://amazon-web-scrapping-1.onrender.com/api/scrape?key=${key}`, {
       'Content-Type': "application/json",
       'method': "GET"
     })
