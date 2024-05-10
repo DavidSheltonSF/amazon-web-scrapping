@@ -16,11 +16,7 @@ const amazonScrapping = () => {
       `
     }
 
-    axios.get(`https://amazon-web-scrapping.onrender.com/api/scrape?key=${key}`, {
-      headers: {
-          "Content-Type": "application/json"
-      }
-    })
+    axios.get(`https://amazon-web-scrapping.onrender.com/api/scrape?key=${key}`)
       .then((res) => {
       const items = res.data;
 
