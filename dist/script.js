@@ -1,5 +1,3 @@
-var _a;
-import axios from 'axios';
 const searchBarElement = document.querySelector('.search-bar');
 const amazonScrapping = () => {
     const key = searchBarElement === null || searchBarElement === void 0 ? void 0 : searchBarElement.value;
