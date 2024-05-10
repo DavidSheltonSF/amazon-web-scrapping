@@ -1,5 +1,5 @@
 var _a;
-import axios from '../node_modules/axios/index';
+import axios from '../node_modules/axios/index.js';
 const searchBarElement = document.querySelector('.search-bar');
 const amazonScrapping = () => {
     const key = searchBarElement === null || searchBarElement === void 0 ? void 0 : searchBarElement.value;
