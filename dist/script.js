@@ -1,12 +1,8 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const axios_1 = __importDefault(require("axios"));
+var _a;
+import axios from 'axios';
 const searchBarElement = document.querySelector('.search-bar');
 const amazonScrapping = () => {
-    const key = searchBarElement?.value;
+    const key = searchBarElement === null || searchBarElement === void 0 ? void 0 : searchBarElement.value;
     const resultsWrapper = document.querySelector('.results-wrapper');
     const userHelper = document.querySelector('.user-helper');
     if (userHelper) {
@@ -14,7 +10,7 @@ const amazonScrapping = () => {
         <h1>Loading...</h1>
       `;
     }
-    axios_1.default.get(`https://amazon-web-scrapping.onrender.com/api/scrape?key=${key}`, {
+    axios.get(`https://amazon-web-scrapping.onrender.com/api/scrape?key=${key}`, {
         headers: {
             "Content-Type": "application/json"
         }
@@ -43,12 +39,11 @@ const amazonScrapping = () => {
             <p>${product.rating['reviews'] ? product.rating['reviews'] : ''}</p>
           </div>
         `;
-            resultsWrapper?.appendChild(card);
+            resultsWrapper === null || resultsWrapper === void 0 ? void 0 : resultsWrapper.appendChild(card);
         });
     })
         .catch((err) => {
-        console.log(err
-        );
+        console.log(err);
         if (userHelper) {
             userHelper.innerHTML = `
         <h1>Something went wrong. Please, try later.</h1>
@@ -56,8 +51,7 @@ const amazonScrapping = () => {
         }
     });
 };
-const button = document.querySelector('.search-button')
-    ?.addEventListener('click', (event) => {
+const button = (_a = document.querySelector('.search-button')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', (event) => {
     event.preventDefault();
     amazonScrapping();
 });
