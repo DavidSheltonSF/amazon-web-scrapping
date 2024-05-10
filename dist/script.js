@@ -9,7 +9,10 @@ const amazonScrapping = () => {
         <h1>Loading...</h1>
       `;
     }
-    axios.get(`https://amazon-web-scrapping.onrender.com/api/scrape?key=${key}`)
+    axios.get(`https://amazon-web-scrapping.onrender.com/api/scrape?key=${key}`, {
+      'Content-Type': "application/json",
+      'method': "GET"
+    })
         .then((res) => {
         const items = res.data;
         if (userHelper) {
