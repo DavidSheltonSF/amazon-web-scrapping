@@ -8,6 +8,7 @@ const amazonScrapping = () => {
         <h1>Loading...</h1>
       `;
     }
+    // get
     axios.get(`https://amazon-web-scrapping.onrender.com/api/scrape?key=${key}`)
         .then((res) => {
         const items = res.data;
