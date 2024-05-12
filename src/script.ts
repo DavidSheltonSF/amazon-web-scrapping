@@ -51,12 +51,13 @@ const amazonScrapping = () => {
       });
     })
     .catch((err) => {
-        console.log(err);
-        if (userHelper) {
-            userHelper.innerHTML = `
-        <h1>Something went wrong. Please, try later.</h1>
-      `;
-        }
+      clearInterval(loadingIntervalID);
+      console.log(err);
+      if (userHelper) {
+          userHelper.innerHTML = `
+      <h1>Something went wrong. Please, try later.</h1>
+    `;
+      }
     });
     /*
     axios.get(`https://amazon-web-scrapping-1.onrender.com/api/scrape?key=${key}`, {
