@@ -1,8 +1,8 @@
 {
-  "name": "user-data-api",
+  "name": "amazon-web-scrapping",
   "version": "1.0.0",
   "description": "",
-  "main": "./dist/front-end/script.js",
+  "main": "./dist/script.js",
   "scripts": {
     "dev": "vite dev",
     "start": "nodemon",
