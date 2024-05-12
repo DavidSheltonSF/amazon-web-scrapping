@@ -1,5 +1,5 @@
 var _a;
-import loadingIndicator from './utils/loadingIndicator';
+import loadingIndicator from './utils/loadingIndicator.js';
 const searchBarElement = document.querySelector('.search-bar');
 const amazonScrapping = () => {
     const key = searchBarElement === null || searchBarElement === void 0 ? void 0 : searchBarElement.value;
