@@ -8,6 +8,5 @@ export default (feedBackElement) => {
         }
         feedBackElement.innerText += ".";
         dotCount++;
-        console.log("plus");
-    }, 1000);
+    }, 500);
 };
