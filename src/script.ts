@@ -1,4 +1,5 @@
 import axios from 'axios';
+import loadingIndicator from './utils/loadingIndicator';
 
 const searchBarElement = <HTMLInputElement> document.querySelector('.search-bar');
 
@@ -8,34 +9,73 @@ const amazonScrapping = () => {
 
     const resultsWrapper = document.querySelector('.results-wrapper')
 
-    const userHelper = document.querySelector('.user-helper')
+    const userHelper = <HTMLHeadingElement> document.querySelector('.user-helper');
 
+    let loadingIntervalID = undefined;
     if (userHelper){
-      userHelper.innerHTML = `
-        <h1>Loading...</h1>
-      `
+      loadingIntervalID = loadingIndicator(userHelper);
     }
 
+    fetch(`https://amazon-web-scrapping-1.onrender.com/api/scrape?key=${key}`, {
+      'method': "GET"
+    })
+    .then((res) => res.json())
+    .then((data) => {
+
+      clearInterval(loadingIntervalID);
+      
+      const items = data;
+      if (userHelper) {
+          userHelper.innerHTML = '';
+      }
+      if (resultsWrapper) {
+          resultsWrapper.innerHTML = '';
+      }
+      items.forEach((product: Record<string, any>) => {
+          const titleCut = product.title.slice(0, 74) + '...';
+          const card = document.createElement('article');
+          card.classList.add('result-item');
+          card.innerHTML = `
+        <div class="product-image-container">
+          <img class="product-image" src="${product.imageURL}" alt="">
+        </div>
+        <div class="product-title">
+          <h4>${titleCut}</h4>
+        </div>
+        <div class="product-rating">
+          <p>${product.rating['stars'] ? product.rating['stars'] : ''}</p>
+          <p>${product.rating['reviews'] ? product.rating['reviews'] : ''}</p>
+        </div>
+      `;
+          resultsWrapper === null || resultsWrapper === void 0 ? void 0 : resultsWrapper.appendChild(card);
+      });
+    })
+    .catch((err) => {
+        console.log(err);
+        if (userHelper) {
+            userHelper.innerHTML = `
+        <h1>Something went wrong. Please, try later.</h1>
+      `;
+        }
+    });
+    /*
     axios.get(`https://amazon-web-scrapping-1.onrender.com/api/scrape?key=${key}`, {
       'Content-Type': "application/json",
       'method': "GET"
     })
-      .then((res) => {
-      const items = res.data;
-
-      if(userHelper){
-        userHelper.innerHTML = '';
-      }
-      
-      if (resultsWrapper){
-        resultsWrapper.innerHTML = '';
-      }
-      
-      items.forEach((product: Record<string, any>)=> {
-        const titleCut = product.title.slice(0, 74) + '...';
-        const card = document.createElement('article');
-        card.classList.add('result-item')
-        card.innerHTML = `
+        .then((res) => {
+        const items = res.data;
+        if (userHelper) {
+            userHelper.innerHTML = '';
+        }
+        if (resultsWrapper) {
+            resultsWrapper.innerHTML = '';
+        }
+        items.forEach((product) => {
+            const titleCut = product.title.slice(0, 74) + '...';
+            const card = document.createElement('article');
+            card.classList.add('result-item');
+            card.innerHTML = `
           <div class="product-image-container">
             <img class="product-image" src="${product.imageURL}" alt="">
           </div>
@@ -43,21 +83,22 @@ const amazonScrapping = () => {
             <h4>${titleCut}</h4>
           </div>
           <div class="product-rating">
-            <p>${product.rating['stars'] ? product.rating['stars'] : '' }</p>
+            <p>${product.rating['stars'] ? product.rating['stars'] : ''}</p>
             <p>${product.rating['reviews'] ? product.rating['reviews'] : ''}</p>
           </div>
-        `
-        resultsWrapper?.appendChild(card);
-      })
-  })
-  .catch((err) => {
-    console.log(err);
-    if (userHelper){
-      userHelper.innerHTML = `
+        `;
+            resultsWrapper === null || resultsWrapper === void 0 ? void 0 : resultsWrapper.appendChild(card);
+        });
+    })
+        .catch((err) => {
+        console.log(err);
+        if (userHelper) {
+            userHelper.innerHTML = `
         <h1>Something went wrong. Please, try later.</h1>
-      `
-    }
-  });
+      `;
+        }
+    });
+    */
 }
 
 const button = document.querySelector('.search-button')

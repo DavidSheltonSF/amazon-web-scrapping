@@ -1,22 +1,21 @@
 var _a;
+import loadingIndicator from './utils/loadingIndicator';
 const searchBarElement = document.querySelector('.search-bar');
-const amazonScrapping = async () => {
+const amazonScrapping = () => {
     const key = searchBarElement === null || searchBarElement === void 0 ? void 0 : searchBarElement.value;
     const resultsWrapper = document.querySelector('.results-wrapper');
     const userHelper = document.querySelector('.user-helper');
+    let loadingIntervalID = undefined;
     if (userHelper) {
-        userHelper.innerHTML = `
-        <h1>Loading...</h1>
-      `;
+        loadingIntervalID = loadingIndicator(userHelper);
     }
-
     fetch(`https://amazon-web-scrapping-1.onrender.com/api/scrape?key=${key}`, {
-      'Content-Type': "application/json",
-      'method': "GET"
+        'method': "GET"
     })
-    .then((res) => res.json())
-    .then((data) => {
-      const items = data;
+        .then((res) => res.json())
+        .then((data) => {
+        clearInterval(loadingIntervalID);
+        const items = data;
         if (userHelper) {
             userHelper.innerHTML = '';
         }
@@ -28,21 +27,21 @@ const amazonScrapping = async () => {
             const card = document.createElement('article');
             card.classList.add('result-item');
             card.innerHTML = `
-          <div class="product-image-container">
-            <img class="product-image" src="${product.imageURL}" alt="">
-          </div>
-          <div class="product-title">
-            <h4>${titleCut}</h4>
-          </div>
-          <div class="product-rating">
-            <p>${product.rating['stars'] ? product.rating['stars'] : ''}</p>
-            <p>${product.rating['reviews'] ? product.rating['reviews'] : ''}</p>
-          </div>
-        `;
+        <div class="product-image-container">
+          <img class="product-image" src="${product.imageURL}" alt="">
+        </div>
+        <div class="product-title">
+          <h4>${titleCut}</h4>
+        </div>
+        <div class="product-rating">
+          <p>${product.rating['stars'] ? product.rating['stars'] : ''}</p>
+          <p>${product.rating['reviews'] ? product.rating['reviews'] : ''}</p>
+        </div>
+      `;
             resultsWrapper === null || resultsWrapper === void 0 ? void 0 : resultsWrapper.appendChild(card);
         });
     })
-    .catch((err) => {
+        .catch((err) => {
         console.log(err);
         if (userHelper) {
             userHelper.innerHTML = `
