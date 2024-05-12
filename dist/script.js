@@ -9,6 +9,48 @@ const amazonScrapping = async () => {
         <h1>Loading...</h1>
       `;
     }
+
+    fetch(`https://amazon-web-scrapping-1.onrender.com/api/scrape?key=${key}`, {
+      'Content-Type': "application/json",
+      'method': "GET"
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      const items = data;
+        if (userHelper) {
+            userHelper.innerHTML = '';
+        }
+        if (resultsWrapper) {
+            resultsWrapper.innerHTML = '';
+        }
+        items.forEach((product) => {
+            const titleCut = product.title.slice(0, 74) + '...';
+            const card = document.createElement('article');
+            card.classList.add('result-item');
+            card.innerHTML = `
+          <div class="product-image-container">
+            <img class="product-image" src="${product.imageURL}" alt="">
+          </div>
+          <div class="product-title">
+            <h4>${titleCut}</h4>
+          </div>
+          <div class="product-rating">
+            <p>${product.rating['stars'] ? product.rating['stars'] : ''}</p>
+            <p>${product.rating['reviews'] ? product.rating['reviews'] : ''}</p>
+          </div>
+        `;
+            resultsWrapper === null || resultsWrapper === void 0 ? void 0 : resultsWrapper.appendChild(card);
+        });
+    })
+    .catch((err) => {
+        console.log(err);
+        if (userHelper) {
+            userHelper.innerHTML = `
+        <h1>Something went wrong. Please, try later.</h1>
+      `;
+        }
+    });
+    /*
     axios.get(`https://amazon-web-scrapping-1.onrender.com/api/scrape?key=${key}`, {
       'Content-Type': "application/json",
       'method': "GET"
@@ -48,6 +90,7 @@ const amazonScrapping = async () => {
       `;
         }
     });
+    */
 };
 const button = (_a = document.querySelector('.search-button')) === null || _a === void 0 ? void 0 : _a.addEventListener('click', (event) => {
     event.preventDefault();
