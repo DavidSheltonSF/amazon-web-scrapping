@@ -65,10 +65,10 @@
 
 .results-wrapper {
   display: grid;
-  grid-template-columns: 280px 280px;
+  grid-template-columns: 360px 360px;
   row-gap: 10px;
-  column-gap: 20px;
-  width: 90%;
+  column-gap: 40px;
+  width: 100%;
   justify-content: center;
   align-items: center;
 
@@ -79,7 +79,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 280px;
+  width: 360px;
   height: 600px;
   border: 1px solid rgba(83, 68, 68, 0.481);
   border-radius: 3px;
