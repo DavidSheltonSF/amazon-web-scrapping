@@ -42,11 +42,12 @@ const amazonScrapping = () => {
         });
     })
         .catch((err) => {
+        clearInterval(loadingIntervalID);
         console.log(err);
         if (userHelper) {
             userHelper.innerHTML = `
-        <h1>Something went wrong. Please, try later.</h1>
-      `;
+      <h1>Something went wrong. Please, try later.</h1>
+    `;
         }
     });
     /*
